@@ -41,6 +41,7 @@ class Land:
     name: str
     gold: float
     guardians: int
+    ratio = gold/guardians
 
     @classmethod
     def random(cls):
@@ -64,3 +65,8 @@ class Land:
 
     def set_guardians(self, new_guardians: int) -> None:
         self.guardians = new_guardians
+
+    def __lt__(self, other) -> bool:
+        return self.ratio < other.ratio
+    def __gt__(self, other) -> bool:
+        return self.ratio > other.ratio
