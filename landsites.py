@@ -68,6 +68,9 @@ class Land:
     def get_ratio(self):
         return self.guardians/(self.gold+1)
         # return self.gold/(self.guardians+1)
+
+    def get_reward(self, adventurers):
+        return min(((adventurers*self.get_gold())/self.get_guardians()),self.get_gold())
     
     def __lt__(self, other):
         return self.get_ratio() < other.get_ratio()    

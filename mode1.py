@@ -20,6 +20,7 @@ class Mode1Navigator:
         """
         self.adventurers: int = adventurers
         self.sites = mergesort(sites)
+        self.length = len(self.sites)
         # self.sites = BinarySearchTree()
         # for land in sites:
         #     self.sites[land.get_ratio()] = land
@@ -30,18 +31,15 @@ class Mode1Navigator:
         select_sites generate and optimises a list of sites to invade and the amount of adventurers to send to each site
 
         :return: a list of tuples that contains the site and the corresponding adventurer count
-        :complexity best: 
-        :complexity worst:
-        
+        :complexity best: O(1) occurs if there are no adventurers left or there are no sites
+        :complexity worst: O(n) occurs if there are more than one site and there are adventurers
+        :variable n: n is the number of lands in the sites list
         """
-        remaining : int = int(self.adventurers) #making sure im not editing the instance field
-        n = 0
         output=[]
-        while remaining > 0: #n
-            try:
-                currentLand = self.sites[n]
-            except IndexError:
-                break
+        remaining : int = int(self.adventurers) # defensive copying
+        n = 0
+        while remaining > 0 and n <= self.length: #n
+            currentLand = self.sites[n]
             n+=1
             amountToSend = min(currentLand.get_guardians(), remaining) # 1
             remaining -= amountToSend
@@ -52,15 +50,29 @@ class Mode1Navigator:
     
     def select_sites_from_adventure_numbers(self, adventure_numbers: list[int]) -> list[float]:
         """
-        select_sites_from_adventure_numbers _summary_
+        select_sites_from_adventure_numbers calculates the maximum amount of reward you can make with different adventurer numbers
 
-        :param adventure_numbers: _description_
-        :raises NotImplementedError: _description_
-        :return: _description_
+        :param adventure_numbers: list of integer counts of adventurers
+        :return: returns corresponding reward in the same order of inputs
         :complexity best: 
         :complexity worst:
         """
-        raise NotImplementedError()
+        output = []
+        for adventurers in adventure_numbers:
+            n=0
+            currentReward = 0
+            while adventurers > 0 and n <= self.length:
+                currentLand = self.sites[n]
+                amountToSend = min(currentLand.get_guardians(), adventurers)
+                adventurers -= amountToSend
+                currentReward += currentLand.get_reward(amountToSend)
+                n+=1
+            output.append(currentReward)
+        return output
+
+
+    
+        
 
     def update_site(self, land: Land, new_reward: float, new_guardians: int) -> None:
         """
