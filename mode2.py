@@ -5,6 +5,9 @@ class Mode2Navigator:
     """
     Student-TODO: short paragraph as per
     https://edstem.org/au/courses/14293/lessons/46720/slides/318306
+        :complexity best: 
+        :complexity best: 
+        :complexity worst:
     """
 
     def __init__(self, n_teams: int) -> None:

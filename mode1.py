@@ -1,6 +1,6 @@
 from landsites import Land
 from data_structures.bst import BinarySearchTree
-
+from algorithms.mergesort import mergesort
 
 class Mode1Navigator:
     """
@@ -10,45 +10,55 @@ class Mode1Navigator:
     """
     def __init__(self, sites: list[Land], adventurers: int) -> None:
         """
-        Student-TODO: Best/Worst Case
+        __init__ constructor for mode 1 navigator class
+
+        :param sites: a list of Land objects that this instance should have access to
+        :param adventurers: an integer amount of adventurers that this instance will have access to
+        :complexity best: O(n*log(n)) occurs no matter what
+        :complexity worst: O(n*log(n)) occurs no matter what
+        :variable n: the lenght of parameter sites
         """
         self.adventurers: int = adventurers
-        self.sites = BinarySearchTree()
-        for land in sites:
-            ratio: float = land.get_gold()/(land.get_guardians()+1)
-            self.sites[ratio] = land
+        self.sites = mergesort(sites)
+        # self.sites = BinarySearchTree()
+        # for land in sites:
+        #     self.sites[land.get_ratio()] = land
 
-    def bound_max(self,bound):
-        current = self.sites.root
-        while True:
-            if current.right == bound:
-                return current
-            else:
-                return
 
     def select_sites(self) -> list[tuple[Land, int]]:
         """
-        Student-TODO: Best/Worst Case
+        select_sites generate and optimises a list of sites to invade and the amount of adventurers to send to each site
+
+        :return: a list of tuples that contains the site and the corresponding adventurer count
+        :complexity best: 
+        :complexity worst:
+        
         """
         remaining : int = int(self.adventurers) #making sure im not editing the instance field
+        n = 0
         output=[]
-        bound=None
-        while remaining > 1:
-            current=self.bound_max(bound)
-            currentLand:Land = current.item
-            currentGuardians = currentLand.get_guardians()
-            amountToSend = min(remaining, currentGuardians)
+        while remaining > 0: #n
+            try:
+                currentLand = self.sites[n]
+            except IndexError:
+                break
+            n+=1
+            amountToSend = min(currentLand.get_guardians(), remaining) # 1
             remaining -= amountToSend
             tup = (currentLand, amountToSend)
-            output.append(tup)
-            bound = current
+            output.append(tup) # 1
         return output
                 
-
-
+    
     def select_sites_from_adventure_numbers(self, adventure_numbers: list[int]) -> list[float]:
         """
-        Student-TODO: Best/Worst Case
+        select_sites_from_adventure_numbers _summary_
+
+        :param adventure_numbers: _description_
+        :raises NotImplementedError: _description_
+        :return: _description_
+        :complexity best: 
+        :complexity worst:
         """
         raise NotImplementedError()
 
@@ -59,9 +69,8 @@ class Mode1Navigator:
         :param land: target land
         :param new_reward: target reward
         :param new_guardians: target guardians
-        best case and worst case:
-        O(1)
-        occurs constantly
+        :complexity best: O(1) occurs no matter what
+        :complexity worst: O(1) occurs no matter what
         """
         land.set_gold(new_reward)
         land.set_guardians(new_guardians)

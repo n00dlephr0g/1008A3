@@ -1,15 +1,9 @@
-from data_structures.heap import MaxHeap
-from data_structures.bst import BinarySearchTree
-from landsites import Land
+from mode1 import *
+
+a = []
+
+for i in range(10):
+    a.append(Land.random())
 
 
-a: BinarySearchTree = BinarySearchTree()
-
-
-
-while True:
-    try:
-        print(bound_max(a,None))
-    except:
-        break
-    
+print(mergesort(a))
