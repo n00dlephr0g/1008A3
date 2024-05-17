@@ -33,18 +33,18 @@ class Mode1Navigator:
         :return: a list of tuples that contains the site and the corresponding adventurer count
         :complexity best: O(1) occurs if there are no adventurers left or there are no sites
         :complexity worst: O(n) occurs if there are more than one site and there are adventurers
-        :variable n: n is the number of lands in the sites list
+        :variable n: amount of sites
         """
         output=[]
         remaining : int = int(self.adventurers) # defensive copying
         n = 0
         while remaining > 0 and n <= self.length: #n
             currentLand = self.sites[n]
-            n+=1
             amountToSend = min(currentLand.get_guardians(), remaining) # 1
             remaining -= amountToSend
             tup = (currentLand, amountToSend)
             output.append(tup) # 1
+            n+=1
         return output
                 
     
@@ -54,8 +54,10 @@ class Mode1Navigator:
 
         :param adventure_numbers: list of integer counts of adventurers
         :return: returns corresponding reward in the same order of inputs
-        :complexity best: 
-        :complexity worst:
+        :complexity best: O(m) 
+        :complexity worst: O(m*n)
+        :variable n: amount of sites
+        :variable m: size of adventure_numbers
         """
         output = []
         for adventurers in adventure_numbers:
@@ -70,9 +72,6 @@ class Mode1Navigator:
             output.append(currentReward)
         return output
 
-
-    
-        
 
     def update_site(self, land: Land, new_reward: float, new_guardians: int) -> None:
         """
