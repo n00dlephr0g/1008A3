@@ -4,9 +4,43 @@ from algorithms.mergesort import mergesort
 
 class Mode1Navigator:
     """
-    Student-TODO: short paragraph as per
-    https://edstem.org/au/courses/14293/lessons/46720/slides/318306
-    
+    Mode1Navigator class
+
+    instance variables
+        sites
+            a python list containing the Land objects that the Mode1Navigator has access to.
+            this list is sorted at the start based on the gold to guardian ratio.
+            the choice to keep the sites attribute as a sorted python list instead of using other
+            data structures is due to its ease of use and the simplicity of list data structures.
+        adventurers
+            an integer of how many adventurers the Mode1Navigator has to its disposal.
+            can change over time.
+        length:
+            an integer of how many lands are in the list.
+            is instanciated for convenience in 2 of the methods.
+
+    methods
+        __init__()
+            initialises instance variables.
+            also sorts the sites list using mergesort provided before storing it.
+            the mergesort makes the constructor have a TC of O(n*log(n))
+            where n is the size of the provided sites list
+        select_sites()
+            returns the optimal list of sites to invade and amount of adventurers to send to each.
+            total amount of adventurers to send does not exceed the amount of adventurers on hand.
+            since the sites variable was already sorted in the init method, this function goes 
+            through each Land object 1-by-1 (in optimal order) until there will be no troops left
+            to send.
+            doesnt actually modify any objects in self.sites or change the value of self.adventurers.
+            the loop included makes this method have a TC of O(n)
+            where n is the length of the sites list
+        select_sites_from_adventure_numbers()
+            returns a list of maximum rewards that can be reached given a list of adventurer counts.
+            uses similar logic as select_sites() but calls that loop for every different adventurer
+            count. this means the logic includes 2 loops
+
+        
+
     """
     def __init__(self, sites: list[Land], adventurers: int) -> None:
         """
@@ -37,14 +71,13 @@ class Mode1Navigator:
         """
         output=[]
         remaining : int = int(self.adventurers) # defensive copying
-        n = 0
-        while remaining > 0 and n <= self.length: #n
+        for n in range(self.length):
+            n <= self.length
             currentLand = self.sites[n]
             amountToSend = min(currentLand.get_guardians(), remaining) # 1
             remaining -= amountToSend
             tup = (currentLand, amountToSend)
             output.append(tup) # 1
-            n+=1
         return output
                 
     
@@ -61,14 +94,12 @@ class Mode1Navigator:
         """
         output = []
         for adventurers in adventure_numbers:
-            n=0
             currentReward = 0
-            while adventurers > 0 and n <= self.length:
+            for n in range(self.length):
                 currentLand = self.sites[n]
                 amountToSend = min(currentLand.get_guardians(), adventurers)
                 adventurers -= amountToSend
                 currentReward += currentLand.get_reward(amountToSend)
-                n+=1
             output.append(currentReward)
         return output
 
