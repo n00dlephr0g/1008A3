@@ -6,6 +6,8 @@ class Mode1Navigator:
     """
     Student-TODO: short paragraph as per
     https://edstem.org/au/courses/14293/lessons/46720/slides/318306
+
+    
     
     """
     def __init__(self, sites: list[Land], adventurers: int) -> None:

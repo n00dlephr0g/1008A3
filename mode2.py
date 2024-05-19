@@ -1,5 +1,4 @@
-from landsites import Land
-
+from mode1 import *
 
 class Mode2Navigator:
     """
@@ -14,7 +13,8 @@ class Mode2Navigator:
         """
         Student-TODO: Best/Worst Case
         """
-        raise NotImplementedError()
+        self.teamCount = n_teams
+        self.sites = None
 
     def add_sites(self, sites: list[Land]) -> None:
         """
