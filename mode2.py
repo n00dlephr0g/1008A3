@@ -14,16 +14,22 @@ class Mode2Navigator:
         Student-TODO: Best/Worst Case
         """
         self.teamCount = n_teams
-        self.sites = None
+        self.sites = []
 
     def add_sites(self, sites: list[Land]) -> None:
         """
         Student-TODO: Best/Worst Case
         """
-        raise NotImplementedError()
+        self.sites += sites
 
     def simulate_day(self, adventurer_size: int) -> list[tuple[Land | None, int]]:
         """
         Student-TODO: Best/Worst Case
         """
-        raise NotImplementedError()
+        decision = 0
+        Land.get_reward(adventurer_size - decision)
+
+    # adventurers left = initial - sent
+    # sent = initial - adventurers left
+    def score(self,land,initial,adventurersLeft):
+        return 2.5*adventurersLeft+land.get_reward(initial - adventurersLeft)
