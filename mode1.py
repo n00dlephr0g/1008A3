@@ -1,6 +1,6 @@
 from landsites import Land
 from data_structures.bst import BinarySearchTree
-from algorithms.mergesort import mergesort
+from algorithms.mergesort import mergesort, merge
 
 class Mode1Navigator:
     """
