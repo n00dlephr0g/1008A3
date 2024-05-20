@@ -30,6 +30,6 @@ class Mode2Navigator:
         """
         Student-TODO: Best/Worst Case
         """
-        for team in range(self.teamCount):
+        for n in range(self.teamCount):
             pass
 
