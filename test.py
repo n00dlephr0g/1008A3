@@ -1,9 +1,23 @@
-from mode1 import *
+from mode2 import *
 
-a = []
+a = Land("A", 400, 100)
+b = Land("B", 300, 150)
+c = Land("C", 100, 5)
+d = Land("D", 350, 90)
+e = Land("E", 300, 100)
 
-for i in range(10):
-    a.append(Land.random())
+
+sites = [a,b,c,d,e]
+
+total = 100
+sending = 100
 
 
-print(mergesort(a))
+a=scoremergesort(sites,total,sending)
+
+for site in a:
+    print(site.score(total, sending))
+
+
+
+

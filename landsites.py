@@ -69,9 +69,15 @@ class Land:
         return self.guardians/(self.gold+1)
         # return self.gold/(self.guardians+1)
 
+    def plunder(total, sent):
+        pass
+        
     def get_reward(self, adventurers):
         return min(((adventurers*self.get_gold())/self.get_guardians()),self.get_gold())
     
+    def score(self, total, sent):
+        return 2.5*(total-sent) + self.get_reward(sent)
+
     def __lt__(self, other):
         return self.get_ratio() < other.get_ratio()    
     
@@ -82,4 +88,16 @@ class Land:
         return self.get_ratio() <= other.get_ratio() 
        
     def __ge__(self, other):
+        return self.get_ratio() >= other.get_ratio()
+    
+    def lt(self, other, adventurers):
+        return self.get_ratio() < other.get_ratio()    
+    
+    def gt(self, other, adventurers):
+        return self.get_ratio() > other.get_ratio()    
+    
+    def le(self, other, adventurers):
+        return self.get_ratio() <= other.get_ratio() 
+       
+    def ge(self, other, adventurers):
         return self.get_ratio() >= other.get_ratio()
