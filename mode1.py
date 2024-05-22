@@ -1,6 +1,6 @@
-from landsites import Land
+from landsites import *
 from data_structures.bst import BinarySearchTree
-from algorithms.mergesort import mergesort, merge
+from algorithms.mergesort import *
 
 class Mode1Navigator:
     """
@@ -63,7 +63,7 @@ class Mode1Navigator:
         :variable n: the lenght of parameter sites
         """
         self.adventurers: int = adventurers
-        self.sites = mergesort(sites)
+        self.sites = mergesortmax(sites)
         self.length = len(self.sites)
         # self.sites = BinarySearchTree()
         # for land in sites:
