@@ -1,5 +1,5 @@
-from mode1 import *
-
+from landsites import *
+from algorithms.mergesort import *
 
 class Mode2Navigator:
     """
