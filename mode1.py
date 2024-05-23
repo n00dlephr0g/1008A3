@@ -48,7 +48,7 @@ class Mode1Navigator:
             updates a Land object
             nothing special, just uses Land.set_guardians() and Land.set_gold() to update the object.
 
-
+    
     """
     
     def __init__(self, sites: list[Land], adventurers: int) -> None:
@@ -62,7 +62,7 @@ class Mode1Navigator:
         :variable n: the lenght of parameter sites
         """
         self.adventurers: int = adventurers
-        self.sites = mergesortmax(sites)
+        self.sites = mergesortMax(sites, lambda x: x.get_ratio())
         self.length = len(self.sites)
         # self.sites = BinarySearchTree()
         # for land in sites:

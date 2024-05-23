@@ -43,6 +43,7 @@ class Land:
     name: str
     gold: float
     guardians: int
+    available: int = 0
 
     @classmethod
     def random(cls):
@@ -61,38 +62,35 @@ class Land:
     def get_guardians(self) -> int:
         return self.guardians
 
-    def set_gold(self, new_gold: float) -> None:
-        self.gold = new_gold
-
-    def set_guardians(self, new_guardians: int) -> None:
-        self.guardians = new_guardians
-
     def get_ratio(self):
         # return self.guardians/(self.gold+1)
         return self.gold/(self.guardians+1)
         
     def get_reward(self, adventurers):
-        return min(((adventurers*self.get_gold())/self.get_guardians()),self.get_gold())
+        return min(((adventurers*self.get_gold())/(self.get_guardians()+0.0000001)),self.get_gold())
+
+    def get_score(self):
+        sent=min(self.available,self.get_guardians())
+        return 2.5*(self.available-sent) + self.get_reward(sent)
+
+    def set_gold(self, new_gold: float) -> None:
+        self.gold = new_gold
+
+    def set_guardians(self, new_guardians: int) -> None:
+        self.guardians = new_guardians
     
-    def get_score(self, available):
-        sent=min(available,self.get_guardians())
-        return 2.5*(available-sent) + self.get_reward(sent)
-    
-    def ge_score(self,other,available):
-        return self.get_score(available) >= other.get_score(available)
-    
-    def lt_score(self,other,available):
-        return self.get_score(available) < other.get_score(available)
+    def set_available(self, available):
+        self.available = available
 
     def __lt__(self, other):
-        return self.get_ratio() < other.get_ratio()    
+        return self.get_score() < other.get_score()    
     
     def __gt__(self, other):
-        return self.get_ratio() > other.get_ratio()    
+        return self.get_score() > other.get_score()    
     
     def __le__(self, other):
-        return self.get_ratio() <= other.get_ratio() 
+        return self.get_score() <= other.get_score() 
        
     def __ge__(self, other):
-        return self.get_ratio() >= other.get_ratio()
+        return self.get_score() >= other.get_score()
     

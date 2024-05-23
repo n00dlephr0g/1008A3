@@ -11,21 +11,22 @@ e = Land("E", 300, 100)
 sites = [a,b,c,d,e]
 
 total = 100
- 
+
+for site in sites:
+    site.set_available(total)
+
+a=MaxHeap.heapify(sites)
 
 
-print(scoreMergeSort(sites,total))
 
 
-# print(a.get_max())
-# print(a.get_max())
-# print(a.get_max())
-# print(a.get_max())
-# print(a.get_max())
-# print(a.get_max())
-# print(a.get_max())
-# print(a.get_max())
-# print(a.get_max())
+
+print(a.get_max())
+print(a.get_max())
+print(a.get_max())
+print(a.get_max())
+print(a.get_max())
+
 
 
 
