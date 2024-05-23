@@ -63,11 +63,13 @@ class Land:
         return self.guardians
 
     def get_ratio(self):
-        # return self.guardians/(self.gold+1)
         return self.gold/(self.guardians+1)
         
+    def get_inverse(self):
+        return self.guardians/(self.gold+1)
+
     def get_reward(self, adventurers):
-        return min(((adventurers*self.get_gold())/(self.get_guardians()+0.0000001)),self.get_gold())
+        return round(min(((adventurers*self.get_gold())/(self.get_guardians()+0.0000001)),self.get_gold()))
 
     def get_score(self):
         sent=min(self.available,self.get_guardians())
@@ -81,6 +83,7 @@ class Land:
     
     def set_available(self, available):
         self.available = available
+
 
     def __lt__(self, other):
         return self.get_score() < other.get_score()    

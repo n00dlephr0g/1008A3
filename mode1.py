@@ -62,7 +62,7 @@ class Mode1Navigator:
         :variable n: the lenght of parameter sites
         """
         self.adventurers: int = adventurers
-        self.sites = mergesortMax(sites, lambda x: x.get_ratio())
+        self.sites = mergesort(sites, lambda x: x.get_inverse())
         self.length = len(self.sites)
         # self.sites = BinarySearchTree()
         # for land in sites:
